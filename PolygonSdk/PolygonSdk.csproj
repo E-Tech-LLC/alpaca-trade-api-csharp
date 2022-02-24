@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Alpaca.Markets" Version="5.2.8" />
+    <PackageReference Include="Alpaca.Markets.Extensions" Version="5.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alpaca.Markets\Alpaca.Markets.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Helpers\HttpClientExtensions.Delete.cs">
+      <DependentUpon>Helpers\HttpClientExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\HttpClientExtensions.Get.cs">
+      <DependentUpon>Helpers\HttpClientExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\HttpClientExtensions.Patch.cs">
+      <DependentUpon>Helpers\HttpClientExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Helpers\HttpClientExtensions.Post.cs">
+      <DependentUpon>Helpers\HttpClientExtensions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

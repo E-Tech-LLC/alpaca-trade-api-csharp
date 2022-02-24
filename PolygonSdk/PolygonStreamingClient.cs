@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Alpaca.Markets;
 using Newtonsoft.Json.Linq;
 
-namespace Alpaca.Markets
+namespace PolygonSdk
 {
     /// <summary>
     /// Provides unified type-safe access for Polygon streaming API via websockets.
@@ -28,16 +29,16 @@ namespace Alpaca.Markets
         private readonly IDictionary<String, Action<JToken>> _handlers;
 
         /// <inheritdoc />
-        public event Action<IStreamTrade>? TradeReceived;
+        public event Action<IStreamTrade> TradeReceived;
 
         /// <inheritdoc />
-        public event Action<IStreamQuote>? QuoteReceived;
+        public event Action<IStreamQuote> QuoteReceived;
 
         /// <inheritdoc />
-        public event Action<IStreamAgg>? MinuteAggReceived;
+        public event Action<IStreamAgg> MinuteAggReceived;
 
         /// <inheritdoc />
-        public event Action<IStreamAgg>? SecondAggReceived;
+        public event Action<IStreamAgg> SecondAggReceived;
 
         /// <summary>
         /// Creates new instance of <see cref="PolygonStreamingClient"/> object.
@@ -45,7 +46,7 @@ namespace Alpaca.Markets
         /// <param name="configuration">Configuration parameters object.</param>
         public PolygonStreamingClient(
             PolygonStreamingClientConfiguration configuration)
-            : base(configuration.EnsureNotNull(nameof(configuration)))
+            : base(configuration)
         {
             _handlers = new Dictionary<String, Action<JToken>>(StringComparer.Ordinal)
             {
@@ -224,7 +225,7 @@ namespace Alpaca.Markets
         private static String getParams(
             String channel,
             IEnumerable<String> symbols) =>
-            String.Join(",", symbols.Select(symbol => getParams(channel, symbol)));
+            String.Join(",",symbols.Select(symbol => getParams(channel, symbol)));
 
         private void handleTradesChannel(
             JToken token) =>

@@ -65,7 +65,7 @@ namespace Alpaca.Markets
             return map.Results.StockTypes
                 .Concat(map.Results.IndexTypes)
                 .GroupBy(
-                    kvp => kvp.Key, 
+                    kvp => kvp.Key,
                     kvp => kvp.Value,
                     StringComparer.Ordinal)
                 .ToDictionary(
@@ -100,7 +100,7 @@ namespace Alpaca.Markets
             CancellationToken cancellationToken = default) =>
             _httpClient.GetAsync
                 <IHistoricalItems<IAgg>, JsonHistoricalItems<IAgg, JsonPolygonAgg>>(
-                    request.EnsureNotNull(nameof(request)).Validate().GetUriBuilder(this), 
+                    request.EnsureNotNull(nameof(request)).Validate().GetUriBuilder(this),
                     cancellationToken);
 
         /// <inheritdoc />
@@ -141,7 +141,7 @@ namespace Alpaca.Markets
                 new UriBuilder(_httpClient.BaseAddress)
                 {
                     Path = path
-                }, 
+                },
                 getDefaultPolygonApiQueryBuilder());
 
         private QueryBuilder getDefaultPolygonApiQueryBuilder()
